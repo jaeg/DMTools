@@ -10,6 +10,7 @@
   <style>
     h3 { color: white;}
     h1 {color: white;}
+    a {color: white;}
     .dead {
        text-decoration: line-through;
     }
@@ -49,6 +50,10 @@
 </head>
 
 <body>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+    </div>
     <div ng-controller = "InitiativeController">
         <h1>DM Tools</h1>
         <h3>Add a character</h3>
@@ -82,7 +87,7 @@
             </span>
             <ul>
                 <li ng-repeat="character in initiativeList | orderBy: 'initiative' : true" >
-                    <a href ng-click="selectCharacter(character)" ng-class="{'dead' : character.dead}">{{initiative.name}}</a>
+                    <a href ng-click="selectCharacter(character)" ng-class="{'dead' : character.dead}">{{character.name}}</a>
                     <input type="text" ng-model="character.newInitiative"/>
                     Dead: <input type="checkbox" ng-model="character.dead"/>
                     Status: <input type="text" ng-model="character.status"/>
@@ -92,7 +97,7 @@
             <button ng-click="deleteDead()">Delete Dead</button>
             <button ng-click="updateOrder()">Update</button>
         </div>
-        
+        <br/>
         <div id="characterInfo" ng-hide = "selectedCharacter == null">
             <h3>Character Info</h3>
             Name: {{selectedCharacter.name}}<br/>
