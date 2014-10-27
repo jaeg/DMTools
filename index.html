@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html lang="">
+<html ng-app="dmTools">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DMTools</title>
-
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    .dead {
+       text-decoration: line-through;
+    }
+      
+    html {
+     background-color: #2c3e50;   
+    }
+      
+    #characterAdding {
+     background-color: #7f8c8d;
+    }
+      
+    #characterInitiative {
+     background-color: #7f8c8d;
+    }
+  </style>
 </head>
 
 <body>
+    <div ng-controller = "InitiativeController">
+        <h1>DM Tools</h1>
+        <div id="characterAdding">
+            <h3>Add a character</h3>
+            <form ng-submit="addInitiative()">
+                <label for="name">Name: </label><input id="name" ng-model="characterName" type="text" ng-change = "incrementCount = 1"/>|<label for="increment" >Auto increment name: </label><input type="checkbox" name="increment" ng-model="autoIncrement">
+                <br/>
+                <label>Initiative: </label><input ng-model="characterInitiative" type="text"/>| <label for="modifier">Is Modifier:</label><input type="checkbox" name="modifier" ng-model="isModifier">
+                <br/>
+                <label>Notes:</label><input ng-model="characterNotes" type="text"/>
+                <br/>
+                <label>Status Condition:</label><input ng-model="characterStatusCondition" type="text"/>
+    
+                <input type="submit" value="Add"/>
+            </form>
+        </div>
+        <br/>
+        <div id="characterInitiative">
+            <h3>Initiative Order:</h3>
+            <ul>
+                <li ng-repeat="initiative in initiativeList | orderBy: 'initiative' : true" >
+                    <a href ng-click="selectCharacter(initiative)" ng-class="{'dead' : initiative.dead}">{{initiative.name}}</a>
+                    <input type="text" ng-model="initiative.newInitiative"/>
+                    Dead: <input type="checkbox" ng-model="initiative.dead"/>
+                    Status: <input type="text" ng-model="initiative.status"/>
+                </li>
+            </ul>
 
+            <button ng-click="deleteDead()">Delete Dead</button>
+            <button ng-click="updateOrder()">Update</button>
+        </div>
+        
+        <div id="characterInfo" >
+            <h3>Character Info</h3>
+            Name: {{selectedCharacter.name}}<br/>
+            Status: Status: <input type="text" ng-model="selectedCharacter.status"/><br/>
+            Notes: {{selectedCharacter.notes}}
+        </div>
+
+    </div>
+    
 </body>
 </html>
