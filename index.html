@@ -23,6 +23,10 @@
     #characterInitiative {
      background-color: #7f8c8d;
     }
+      
+    #characterInfo {
+     background-color: #7f8c8d;
+    }
   </style>
 </head>
 
@@ -59,11 +63,14 @@
             <button ng-click="updateOrder()">Update</button>
         </div>
         
-        <div id="characterInfo" >
+        <div id="characterInfo" ng-hide = "selectedCharacter == null">
             <h3>Character Info</h3>
             Name: {{selectedCharacter.name}}<br/>
             Status: Status: <input type="text" ng-model="selectedCharacter.status"/><br/>
             Notes: {{selectedCharacter.notes}}
+            
+            <br/>
+            <a href ng-click="selectedCharacter = null">Close</a>
         </div>
 
     </div>
