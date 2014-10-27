@@ -31,6 +31,8 @@ app.controller('InitiativeController', ['$scope', function($scope) {
         character.notes = $scope.characterNotes;
         character.status = $scope.characterStatus;
         character.dead = false;
+        if ($scope.stats != null)
+            character.stats = stats;
         
         $scope.initiativeList.push(character);  
     };
