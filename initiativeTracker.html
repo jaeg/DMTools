@@ -10,24 +10,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
     <script src="app.js"></script>
-    <style>
-        .dead {
-            text-decoration: line-through;
-        }
-        .block .block {
-            background-color: #d9d9d9;
-            padding: 15px;
-            margin-top: 4px;
-        }
-        .inactiveTab {
-            background-color: #a6a6a6;
-            padding: 5px 11px;
-        }
-        .activeTab {
-            background-color: #d9d9d9;
-            padding: 5px 11px;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -44,75 +27,50 @@
                 </ul>
             </div>
         </header>
-        <div class="container" ng-controller="InitiativeController">
-            <div class="block">
-                <div>
-                    <h1>DM Tools</h1>
-                    <h3>Add a character</h3>
-                    <div id="characterAdding" ng-init="tab=1">
-                        <a href class="inactiveTab" ng-click="tab=1" ng-class="{activeTab: tab===1}">Manual Character</a>
-                        <a href class="inactiveTab" ng-click="tab=2" ng-class="{activeTab: tab===2}">From Monster List</a>
-                        <form ng-submit="addInitiative()" ng-show="tab===1" class="block">
-                            <label for="name">Name: </label>
-                            <input id="name" ng-model="characterName" type="text" ng-change="incrementCount = 1" />|
-                            <label for="increment">Auto increment name: </label>
-                            <input type="checkbox" name="increment" ng-model="autoIncrement">
-                            <br/>
-                            <label ng-hide="isModifier==true">Initiative: </label>
-                            <label ng-show="isModifier==true">Initiative Mod: </label>
-                            <input ng-model="characterInitiative" type="text" />|
-                            <label for="modifier">Is Modifier:</label>
-                            <input type="checkbox" name="modifier" ng-model="isModifier" title="This will roll a 1d20 + the modifier for you.">
-                            <br/>
-                            <label>Notes:</label>
-                            <input ng-model="characterNotes" type="text" />
-                            <br/>
-                            <label>Status Condition:</label>
-                            <input ng-model="characterStatusCondition" type="text" />
-                            <br/>
-                            <input type="submit" value="Add Character" />
-                        </form>
-                        <div ng-show="tab===2">
-                            <form ng-submit="addInitiative()" class="block">
-                                <select>
-                                    <option>Test</option>
-                                </select>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
 
-            <div id="characterInitiative" class="block">
-                <h3>Initiative Order:</h3>
-                <div class="block">
-                    <span ng-show="initiativeList.length == 0">
-                            Nothing to show here.
-                        </span>
-                    <ul>
-                        <li ng-repeat="character in initiativeList | orderBy: 'initiative' : true">
-                            <a href ng-click="selectCharacter(character)" ng-class="{'dead' : character.dead}">{{character.name}}</a>
-                            <input type="text" ng-model="character.newInitiative" /> Dead:
-                            <input type="checkbox" ng-model="character.dead" /> Status:
-                            <input type="text" ng-model="character.status" />
-                        </li>
-                    </ul>
+        <div class="container">
 
-                    <button ng-click="deleteDead()">Delete Dead</button>
-                    <button ng-click="updateOrder()">Update</button>
-                </div>
-            </div>
-            <br/>
-            <div id="characterInfo" class="block" ng-hide="selectedCharacter == null">
-                <h3>Character Info</h3> Name: {{selectedCharacter.name}}
-                <br/> Status: Status:
-                <input type="text" ng-model="selectedCharacter.status" />
-                <br/> Notes: {{selectedCharacter.notes}}
-
+            <div class="block grid_5">
+                <h2>Create Room</h2>
+                <input placeholder="Room Name"/>
                 <br/>
-                <a href ng-click="selectedCharacter = null">Close</a>
+                <input placeholder="DM Pass"/>
+                <br/>
+                <input placeholder="Optional Access Password"/>
+                <br/>
+                <button>Create!</button>
+                <br/>
             </div>
+            <div class="spacer grid_11"></div>
+
+            <div class="block grid_5">
+                <h2>Create Room</h2>
+                <input placeholder="Room Name"/>
+                <br/>
+                <input placeholder="Optional Access Password"/>
+                <br/>
+                <input placeholder="Character Name"/>
+                <br/>
+                <button>Create!</button>
+                <br/>
+            </div>
+            <div class="spacer grid_11"></div>
+            <!-- Template for characters -->
+            <div class="block grid_4">
+                <h2>Character Name</h2>
+                Dex: <input>
+                AC: <input>
+                Initiative: <input>
+                <button>Join Encounter</button>
+            </div>
+
+            <br/>
+
+            <div class="block grid_8">
+                <h2>Initiative Order</h2>
+            </div>
+            <br/>
+
 
         </div>
     </div>
