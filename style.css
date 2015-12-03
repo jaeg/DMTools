@@ -37,6 +37,15 @@ body {
 	background-color:yellow;
 }
 
+.block.alert{
+	background: #e74c3c;
+	color:#ecf0f1;
+}
+
+.block ul {
+	text-align: left;
+}
+
 .nav ul {
   list-style: none;
   background-color: #444;
